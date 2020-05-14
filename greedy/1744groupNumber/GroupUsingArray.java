@@ -18,52 +18,49 @@
 음수와 양수 홀,짝
 0,1 유무 정도를 생각해야 하지 않을까?
 
+이거는 어레이가 메모리는 8KB많았고 속도는 4ms 빨랐다?
 */
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 
-class Main {
+class GroupUsingArray {
     public static void main(String args[]) throws Exception {
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         File data = new File("data.txt");
         BufferedReader br = new BufferedReader(new FileReader(data));
 
         int N = Integer.parseInt(br.readLine());
-        ArrayList<Integer> negative = new ArrayList<Integer>();
-        ArrayList<Integer> positive = new ArrayList<Integer>();
-        int haveOne = 0;
+        int haveOne = 0, negative = 0, positive = 0;
+        int nums[] = new int[N];
         int maxGroup = 0;
 
         for (int i = 0; i < N; i++) {
             int num = Integer.parseInt(br.readLine());
-            if (num < 1)
-                negative.add(num);
+            if (num > 1)
+                positive++;
             if (num == 1)
                 haveOne++;
-            if (num > 1)
-                positive.add(num);
+            if (num < 1)
+                negative++;
+            nums[i] = num;
         }
-
         br.close();
-
-        Collections.sort(negative);
-        Collections.sort(positive);
+        Arrays.sort(nums);
 
         // 음수 부분
-        for (int i = 0; i < negative.size() - 1; i += 2)
-            maxGroup += negative.get(i) * negative.get(i + 1);
-        if (negative.size() % 2 == 1)
-            maxGroup += negative.get(negative.size() - 1);
+        for (int i = 0; i < negative - 1; i += 2)
+            maxGroup += nums[i] * nums[i + 1];
+        if (negative % 2 == 1)
+            maxGroup += nums[negative - 1];
 
         // 양수 부분
-        for (int i = positive.size() - 1; i > 0; i -= 2)
-            maxGroup += positive.get(i) * positive.get(i - 1);
-        if (positive.size() % 2 == 1)
-            maxGroup += positive.get(0);
+        for (int i = nums.length - 1; i > nums.length - positive; i -= 2)
+            maxGroup += nums[i] * nums[i - 1];
+        if (positive % 2 == 1)
+            maxGroup += nums[nums.length - positive];
 
         // 1더해주고 출력
         System.out.println(maxGroup + haveOne);
