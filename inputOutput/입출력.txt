@@ -1,0 +1,18 @@
+입출력 - 2557, 1000, 2558, 10950, 10951, 10952, 10953, 11021, 11022, 11718,/ 
+11719, 11720, 11721, 2741, 2742, 2739, 1924, 8393, 10818, 2438, 2439, 2440, 
+2441, 2442, 2445, 2522, 2446, 10991, 10992
+
+앞의 A+B 출력하는 문제 변형들은 풀고 넘어갔다!
+InputStreamReader
+OutputStreamWriter
+BufferedReader
+BufferedWriter
+StringTokenizer
+사용하면 훨씬 빠른거 같다!
+Scanner 보다!
+대신많이 적어야된다 ㅋㅋㅋ
+Scanner는 next()는 있느디
+br는 없어서 비어있지 않을때까지 하려면
+String line = null;
+for((line = br.readLine()) != null){}
+이렇게 해야함
